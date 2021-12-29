@@ -23,6 +23,8 @@
     <string name="allClear">AC</string>
     <string name="result">=</string>
     <string name="dot">.</string>
-    <string name="backspace">&lt;x</string>
+    <string name="backspace">erase</string>
+    <string name="adv">adv</string>
+
 
 </resources>
