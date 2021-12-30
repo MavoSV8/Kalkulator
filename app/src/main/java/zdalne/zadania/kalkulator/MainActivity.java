@@ -10,12 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText display;
     private ArrayList<String> history = new ArrayList<>();
-
+    private int operatorCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,97 +24,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         display = findViewById(R.id.display);
         display.setShowSoftInputOnFocus(false);
-    }
-    private String formatString(String strToFormat){
-        String strToReturn = strToFormat;
-        if(strToFormat.charAt(0) == '0' && Character.isDigit(strToFormat.charAt(1))){
-            strToReturn = strToFormat.substring(1);
-            return strToReturn;
-        }
-        return strToReturn;
+        display.append("0");
     }
 
-    public void zero(View view) {
-        String checkString = display.getText().toString();
-        int textLen = checkString.length();
 
-        if(textLen == 0){
-            display.append("0");
-        }
-        else if (checkString.charAt(0) != '0'){
-            display.append("0");
-        }
-        else{
-            display.append("0");
-        }
-        //System.out.println(textLen);
-//        if (textLen > 0) {
-//            while (Character.isDigit(checkString.charAt(textLen-1)) && textLen > 0) {
-//                textLen--;
-//            }
-//            if (checkString.charAt(textLen) == '.' && textLen > 0) {
-//                display.append("0");
-//            }
-//        } else {
-//            display.append("0");
-//        }
-    }
-
-    public void one(View view) {
-        display.append("1");
-    }
-
-    public void two(View view) {
-        display.append("2");
-    }
-
-    public void three(View view) {
-        display.append("3");
-    }
-
-    public void four(View view) {
-        display.append("4");
-    }
-
-    public void five(View view) {
-        display.append("5");
-    }
-
-    public void six(View view) {
-        display.append("6");
-    }
-
-    public void seven(View view) {
-        display.append("7");
-    }
-
-    public void eight(View view) {
-        display.append("8");
-    }
-
-    public void nine(View view) {
-        display.append("9");
-    }
-
-    public void add(View view) {
-        display.append("+");
-    }
-
-    public void sub(View view) {
-        display.append("-");
-    }
-
-    public void mul(View view) {
-        display.append("*");
-    }
-
-    public void div(View view) {
-        display.append("/");
-    }
-
-    public void result(View view) {
+    private void calculate(){
         String userExp = display.getText().toString();
-
         Expression exp = new Expression(userExp);
         String result = String.valueOf(exp.calculate());
         display.setText(result);
@@ -121,10 +37,159 @@ public class MainActivity extends AppCompatActivity {
         display.setSelection(result.length());
     }
 
+    public void zero(View view) {
+        String checkString = display.getText().toString();
+        int cursor = display.getSelectionStart();
+        int textLen = checkString.length();
+
+
+        if(checkString.charAt(0) != '0' && textLen == 1) {
+            display.append("0");
+        }
+        else if(cursor >= 2 && (checkString.charAt(cursor - 2) != '+'
+                || checkString.charAt(cursor - 2) != '-'
+                || checkString.charAt(cursor - 2) != '*'
+                || checkString.charAt(cursor - 2) != '/')){
+            System.out.println(checkString.charAt(cursor - 2));
+            display.append("0");
+        }
+
+        display.setSelection(display.getText().length());
+
+    }
+
+    public void one(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("1");
+        } else {
+            display.append("1");
+        }
+        display.setSelection(display.getText().length());
+
+    }
+
+    public void two(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("2");
+        } else {
+            display.append("2");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void three(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("3");
+        } else {
+            display.append("3");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void four(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("4");
+        } else {
+            display.append("4");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void five(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("5");
+        } else {
+            display.append("5");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void six(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("6");
+        } else {
+            display.append("6");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void seven(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("7");
+        } else {
+            display.append("7");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void eight(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("8");
+        } else {
+            display.append("8");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void nine(View view) {
+        if (display.getText().length() == 1 && display.getText().toString().equals("0")) {
+            display.setText("9");
+        } else {
+            display.append("9");
+        }
+        display.setSelection(display.getText().length());
+    }
+
+    public void add(View view) {
+        if (operatorCount >= 1) {
+            calculate();
+            operatorCount = 0;
+        }
+        display.append("+");
+        display.setSelection(display.getText().length());
+        operatorCount++;
+    }
+
+    public void sub(View view) {
+        if (operatorCount >= 1) {
+            calculate();
+            operatorCount = 0;
+        }
+        display.append("-");
+        display.setSelection(display.getText().length());
+        operatorCount++;
+    }
+
+    public void mul(View view) {
+        if (operatorCount >= 1) {
+            calculate();
+            operatorCount = 0;
+        }
+        display.append("*");
+        display.setSelection(display.getText().length());
+        operatorCount++;
+    }
+
+    public void div(View view) {
+        if (operatorCount >= 1) {
+            calculate();
+            operatorCount = 0;
+        }
+        display.append("/");
+        display.setSelection(display.getText().length());
+        operatorCount++;
+    }
+
+
+    public void result(View view) {
+       calculate();
+    }
+
     public void allClear(View view) {
 
         history.clear();
-        display.setText("");
+        display.setText("0");
+        display.setSelection(display.getText().length());
     }
 
     public void clearEntry(View view) {
@@ -135,9 +200,22 @@ public class MainActivity extends AppCompatActivity {
 
             if (cursor != 0 && textLen != 0) {
                 SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
-                selection.replace(cursor - 1, cursor, "");
-                display.setText(selection);
-                display.setSelection(cursor - 1);
+                if (cursor - 1 == 0) {
+                    display.setText("0");
+                    display.setSelection(display.getText().length());
+                } else {
+                    if(display.getText().charAt(cursor-1) == '+'
+                            || display.getText().charAt(cursor-1) == '-'
+                            || display.getText().charAt(cursor-1) == '*'
+                            || display.getText().charAt(cursor-1) == '/')
+                    {
+                        operatorCount--;
+                    }
+                    selection.replace(cursor - 1, cursor, "");
+                    display.setText(selection);
+                    display.setSelection(cursor - 1);
+                }
+
 
             }
         } else {
@@ -156,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void dot(View view) {
         display.append(".");
+        display.setSelection(display.getText().length());
 
     }
 
