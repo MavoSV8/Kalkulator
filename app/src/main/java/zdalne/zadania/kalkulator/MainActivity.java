@@ -10,13 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-import java.util.regex.PatternSyntaxException;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText display;
     private ArrayList<String> history = new ArrayList<>();
-    private int operatorCount = 0;
+    private int operatorIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,43 +140,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        if (operatorCount >= 1) {
+        if (operatorIndex >= 1) {
             calculate();
-            operatorCount = 0;
+            operatorIndex = 0;
         }
         display.append("+");
         display.setSelection(display.getText().length());
-        operatorCount++;
+        operatorIndex = display.getText().toString().indexOf("+");
+//        operatorCount++;
     }
 
     public void sub(View view) {
-        if (operatorCount >= 1) {
+        if (operatorIndex >= 1) {
             calculate();
-            operatorCount = 0;
+            operatorIndex = 0;
         }
         display.append("-");
         display.setSelection(display.getText().length());
-        operatorCount++;
+        operatorIndex = display.getText().toString().indexOf("-");
+//        operatorCount++;
     }
 
     public void mul(View view) {
-        if (operatorCount >= 1) {
+        if (operatorIndex >= 1) {
             calculate();
-            operatorCount = 0;
+            operatorIndex = 0;
         }
         display.append("*");
         display.setSelection(display.getText().length());
-        operatorCount++;
+        operatorIndex = display.getText().toString().indexOf("*");
+//        operatorCount++;
     }
 
     public void div(View view) {
-        if (operatorCount >= 1) {
+        if (operatorIndex >= 1) {
             calculate();
-            operatorCount = 0;
+            operatorIndex = 0;
         }
         display.append("/");
         display.setSelection(display.getText().length());
-        operatorCount++;
+        operatorIndex = display.getText().toString().indexOf("/");
+//        operatorCount++;
     }
 
 
@@ -209,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
                             || display.getText().charAt(cursor-1) == '*'
                             || display.getText().charAt(cursor-1) == '/')
                     {
-                        operatorCount--;
+                        operatorIndex = 0;
                     }
                     selection.replace(cursor - 1, cursor, "");
                     display.setText(selection);
@@ -225,11 +228,33 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void plusMinus(View view) {
+        String operatedString = display.getText().toString();
+        String resultString;
+        String leftString;
+        String rightString;
 
-        int cursor;
+
         int textLen = display.getText().length();
+        boolean digit = Character.isDigit(operatedString.charAt(textLen - 1));
+        if(operatorIndex > 0 && digit){
+            if(operatedString.charAt(operatorIndex) == '+'){
+                leftString = operatedString.substring(0, operatorIndex);
+                rightString = operatedString.substring(operatorIndex+1,textLen);
+                resultString = leftString + '-' +rightString;
+            }
+            else{
+                leftString = operatedString.substring(0, operatorIndex+1);
+                rightString = operatedString.substring(operatorIndex+1,textLen);
+                resultString = leftString + '-' +rightString;
+            }
+            display.setText(resultString);
+        }
+        else if(operatorIndex < 1 && digit && textLen != 1 && operatedString.charAt(0) != '0'){
 
-
+            resultString = '-' + operatedString;
+            display.setText(resultString);
+        }
+        display.setSelection(display.getText().length());
     }
 
     public void dot(View view) {
