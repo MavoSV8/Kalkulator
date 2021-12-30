@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
             display.append("0");
         }
         else if(cursor >= 2 && (checkString.charAt(cursor - 2) != '+'
-                || checkString.charAt(cursor - 2) != '-'
-                || checkString.charAt(cursor - 2) != '*'
-                || checkString.charAt(cursor - 2) != '/')){
+                && checkString.charAt(cursor - 2) != '-'
+                && checkString.charAt(cursor - 2) != '*'
+                && checkString.charAt(cursor - 2) != '/')){
             System.out.println(checkString.charAt(cursor - 2));
             display.append("0");
         }
