@@ -2,26 +2,32 @@ package zdalne.zadania.kalkulator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+
 import android.view.View;
+
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.mariuszgromada.math.mxparser.*;
+import org.mariuszgromada.math.mxparser.Expression;
 
 import java.util.ArrayList;
 
-public class SimpleCalc extends AppCompatActivity {
-    private static final long DOUBLE_CLICK_TIME_DELTA = 700;//milliseconds
-
-    long lastClickTime = 0;
+public class AdvancedCalc extends AppCompatActivity {
 
     private EditText display;
     private TextView historyDisplay;
     private ArrayList<String> history = new ArrayList<>();
     private int operatorIndex = 0;
+
+    private static final long DOUBLE_CLICK_TIME_DELTA = 700;//milliseconds
+
+    long lastClickTime = 0;
 
     private int leftDot = 0;
     private int rightDot = 0;
@@ -29,25 +35,29 @@ public class SimpleCalc extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_calc);
+        setContentView(R.layout.activity_advanced_calc);
         display = findViewById(R.id.display);
+
         historyDisplay = findViewById(R.id.history);
         display.setShowSoftInputOnFocus(false);
         display.append("0");
         getSupportActionBar().hide();
+
     }
-    private void updateHistory(String resultToAdd){
+
+    private void updateHistory(String resultToAdd) {
         history.add(resultToAdd);
-        historyDisplay.append(history.get(history.size()-1) + ' ');
+        historyDisplay.append(history.get(history.size() - 1) + ' ');
     }
 
     private void calculate() {
         String userExp = display.getText().toString();
         Expression exp = new Expression(userExp);
         String result = String.valueOf(exp.calculate());
+
         if(result.equals("NaN")){
-           display.setText("0");
-           display.setSelection(1);
+            display.setText("0");
+            display.setSelection(1);
         }
         else{
             display.setText(result);
@@ -55,7 +65,6 @@ public class SimpleCalc extends AppCompatActivity {
             display.setSelection(result.length());
 
         }
-
     }
 
     public void zero(View view) {
@@ -69,7 +78,8 @@ public class SimpleCalc extends AppCompatActivity {
         } else if (cursor >= 2 && (checkString.charAt(cursor - 2) != '+'
                 && checkString.charAt(cursor - 2) != '-'
                 && checkString.charAt(cursor - 2) != '*'
-                && checkString.charAt(cursor - 2) != '/')) {
+                && checkString.charAt(cursor - 2) != '/'
+                && checkString.charAt(cursor - 2) != '^')) {
             display.append("0");
         }
 
@@ -86,7 +96,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "1");
             display.setText(selection);
@@ -105,7 +116,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "2");
             display.setText(selection);
@@ -123,7 +135,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "3");
             display.setText(selection);
@@ -141,7 +154,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "4");
             display.setText(selection);
@@ -159,7 +173,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "5");
             display.setText(selection);
@@ -177,7 +192,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "6");
             display.setText(selection);
@@ -195,7 +211,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "7");
             display.setText(selection);
@@ -213,7 +230,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "8");
             display.setText(selection);
@@ -232,7 +250,8 @@ public class SimpleCalc extends AppCompatActivity {
                 && (display.getText().toString().charAt(cursor - 2) == '+'
                 || display.getText().toString().charAt(cursor - 2) == '-'
                 || display.getText().toString().charAt(cursor - 2) == '*'
-                || display.getText().toString().charAt(cursor - 2) == '/')) {
+                || display.getText().toString().charAt(cursor - 2) == '/'
+                || display.getText().toString().charAt(cursor - 2) == '^')) {
             SpannableStringBuilder selection = (SpannableStringBuilder) display.getText();
             selection.replace(cursor - 1, cursor, "9");
             display.setText(selection);
@@ -247,7 +266,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -264,7 +283,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -281,7 +300,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -298,7 +317,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -328,6 +347,8 @@ public class SimpleCalc extends AppCompatActivity {
         display.setSelection(display.getText().length());
     }
 
+
+
     public void clearEntry(View view) {
         long clickTime = System.currentTimeMillis();
         if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
@@ -351,7 +372,8 @@ public class SimpleCalc extends AppCompatActivity {
                     if (display.getText().charAt(cursor - 1) == '+'
                             || display.getText().charAt(cursor - 1) == '-'
                             || display.getText().charAt(cursor - 1) == '*'
-                            || display.getText().charAt(cursor - 1) == '/') {
+                            || display.getText().charAt(cursor - 1) == '/'
+                            || display.getText().charAt(cursor - 1) == '^') {
                         operatorIndex = 0;
                     }
                     if (operatorIndex > 0 && display.getText().charAt(cursor - 1) == '.') {
@@ -390,13 +412,11 @@ public class SimpleCalc extends AppCompatActivity {
                 leftString = operatedString.substring(0, operatorIndex);
                 rightString = operatedString.substring(operatorIndex + 1, textLen);
                 resultString = leftString + '+' + rightString;
-            }
-            else if (operatedString.charAt(operatorIndex+1) == '-'){
-                leftString = operatedString.substring(0, operatorIndex+1);
+            } else if (operatedString.charAt(operatorIndex + 1) == '-') {
+                leftString = operatedString.substring(0, operatorIndex + 1);
                 rightString = operatedString.substring(operatorIndex + 2, textLen);
                 resultString = leftString + rightString;
-            }
-            else {
+            } else {
                 leftString = operatedString.substring(0, operatorIndex + 1);
                 rightString = operatedString.substring(operatorIndex + 1, textLen);
                 resultString = leftString + '-' + rightString;
@@ -428,8 +448,269 @@ public class SimpleCalc extends AppCompatActivity {
 
     }
 
-    public void advanced(View view) {
-        Intent intent = new Intent(SimpleCalc.this, AdvancedCalc.class);
+    private String calculateAdv(String expression, String operation) {
+
+        Expression exp;
+        String result;
+        switch (operation) {
+            case "sin":
+                exp = new Expression("sin(" + expression + ")");
+                result = String.valueOf(exp.calculate());
+                break;
+            case "cos":
+                exp = new Expression("cos(" + expression + ")");
+                result = String.valueOf(exp.calculate());
+                break;
+            case "tan":
+                exp = new Expression("tan(" + expression + ")");
+                result = String.valueOf(exp.calculate());
+                break;
+            case "ln":
+                exp = new Expression("ln(" + expression + ")");
+                result = String.valueOf(exp.calculate());
+                break;
+            case "log":
+                exp = new Expression("log10(" + expression + ")");
+                result = String.valueOf(exp.calculate());
+                break;
+            case "sqrt":
+                exp = new Expression("sqrt(" + expression + ")");
+                result = String.valueOf(exp.calculate());
+                break;
+            case "%":
+                exp = new Expression(expression + "/100");
+                result = String.valueOf(exp.calculate());
+                break;
+            default:
+                result = "0";
+        }
+
+        return result;
+    }
+
+    private void showToast() {
+
+        Context context = getApplicationContext();
+        CharSequence text = "Wrong input";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast.makeText(context, text, duration).show();
+    }
+
+    public void sin(View view) {
+
+        String result = calculateAdv(display.getText().toString(), "sin");
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+
+
+            updateHistory(result);
+            display.setSelection(result.length());
+        }
+    }
+
+    public void cos(View view) {
+        String result = calculateAdv(display.getText().toString(), "cos");
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+
+
+            updateHistory(result);
+            display.setSelection(result.length());
+        }
+    }
+
+    public void tan(View view) {
+
+        String result = calculateAdv(display.getText().toString(), "tan");
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+            updateHistory(result);
+            display.setSelection(result.length());
+        }
+
+    }
+
+    public void ln(View view) {
+        String result = calculateAdv(display.getText().toString(), "ln");
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+
+            updateHistory(result);
+            display.setSelection(result.length());
+        }
+    }
+
+    public void log(View view) {
+        String result = calculateAdv(display.getText().toString(), "log");
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+
+        }
+
+
+        updateHistory(result);
+        display.setSelection(result.length());
+    }
+
+    public void percent(View view) {
+
+        String result = calculateAdv(display.getText().toString(), "%");
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+            updateHistory(result);
+            display.setSelection(result.length());
+        }
+    }
+
+    public void squareRoot(View view) {
+        String result = calculateAdv(display.getText().toString(), "sqrt");
+        System.out.println(result);
+        if (result.equals("NaN")) {
+            showToast();
+            leftDot = 0;
+            rightDot = 0;
+            operatorIndex = 0;
+            display.setText("0");
+            display.setSelection(1);
+        } else {
+            int checkIfDot = 0;
+            display.setText(result);
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+            updateHistory(result);
+            display.setSelection(result.length());
+        }
+
+
+    }
+
+    public void powerOfTwo(View view) {
+        int checkIfDot = 0;
+        if (operatorIndex >= 1) {
+            calculate();
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+        }
+        display.append("^2");
+        display.setSelection(display.getText().length());
+        operatorIndex = display.getText().toString().indexOf("^");
+    }
+
+    public void power(View view) {
+        int checkIfDot = 0;
+        if (operatorIndex >= 1) {
+            calculate();
+            checkIfDot = display.getText().toString().indexOf('.');
+            if (checkIfDot == -1) {
+                leftDot = 0;
+            }
+            rightDot = 0;
+            operatorIndex = 0;
+        }
+        display.append("^");
+        display.setSelection(display.getText().length());
+        operatorIndex = display.getText().toString().indexOf("^");
+
+    }
+
+    public void simple(View view) {
+        Intent intent = new Intent(AdvancedCalc.this, SimpleCalc.class);
         startActivity(intent);
     }
 }

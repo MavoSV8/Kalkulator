@@ -25,6 +25,20 @@
     <string name="dot">.</string>
     <string name="backspace">erase</string>
     <string name="adv">adv</string>
-
+    <string name="simpleCalc">Simple Calc</string>
+    <string name="advCalc">Advanced Calc</string>
+    <string name="author">About</string>
+    <string name="exit">Exit</string>
+    <string name="simp">simp</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+    <string name="powerOfTwo">^2</string>
+    <string name="power">^</string>
+    <string name="log">log</string>
+    <string name="ln">ln</string>
+    <string name="percent">%</string>
+    <string name="squareRoot">√</string>
+    <string name="back">back</string>
 
 </resources>

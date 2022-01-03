@@ -4,10 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/drawable/disabled_button.xml" value="0.18162393162393162" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-land/activity_about.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-land/activity_advanced_calc.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-land/activity_main.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-land/activity_simple_calc.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-sw600dp/activity_about.xml" value="0.275" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-sw600dp/activity_advanced_calc.xml" value="0.275" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.275" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout-sw600dp/activity_simple_calc.xml" value="0.275" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout/about_activity.xml" value="0.30085470085470084" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout/activity_about.xml" value="0.30085470085470084" />
+        <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout/activity_advanced_calc.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout/activity_simple_calc.xml" value="0.30085470085470084" />
         <entry key="..\:/Users/Lukas/Desktop/Aplikacje mobilne/Kalkulator/app/src/main/res/layout/adv_calc_activity.xml" value="0.30085470085470084" />

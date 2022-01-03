@@ -2,15 +2,9 @@ package zdalne.zadania.kalkulator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.mariuszgromada.math.mxparser.*;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,4 +17,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void simpleCalc(View view){
+        Intent intent = new Intent(MainActivity.this, SimpleCalc.class);
+        startActivity(intent);
+
+    }
+
+    public void advCalc(View view){
+        Intent intent = new Intent(MainActivity.this, AdvancedCalc.class);
+        startActivity(intent);
+
+    }
+
+    public void about(View view){
+        Intent intent = new Intent(MainActivity.this, About.class);
+        startActivity(intent);
+
+    }
+
+    public void exit(View view){
+        this.finishAffinity();
+
+    }
 }

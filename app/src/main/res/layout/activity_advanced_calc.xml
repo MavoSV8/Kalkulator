@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SimpleCalc">
+    tools:context=".AdvancedCalc">
 
     <TableLayout
         android:id="@+id/tableLayout"
@@ -51,8 +51,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="advanced"
-                android:text="@string/adv" />
+                android:onClick="simple"
+                android:text="@string/simp" />
 
         </TableRow>
 
@@ -91,6 +91,14 @@
                 android:layout_weight="1"
                 android:onClick="plusMinus"
                 android:text="@string/plusMinus" />
+
+            <Button
+                android:id="@+id/sin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="sin"
+                android:text="@string/sin" />
 
 
         </TableRow>
@@ -131,6 +139,14 @@
                 android:onClick="dot"
                 android:text="@string/dot" />
 
+            <Button
+                android:id="@+id/cos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="cos"
+                android:text="@string/cos" />
+
         </TableRow>
 
         <TableRow
@@ -169,6 +185,14 @@
                 android:onClick="zero"
                 android:text="@string/zero" />
 
+            <Button
+                android:id="@+id/tan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="tan"
+                android:text="@string/tan" />
+
         </TableRow>
 
         <TableRow
@@ -206,14 +230,65 @@
                 android:layout_weight="1"
                 android:onClick="div"
                 android:text="@string/div" />
+
+            <Button
+                android:id="@+id/percent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="percent"
+                android:text="@string/percent" />
         </TableRow>
 
+        <TableRow>
+
+            <Button
+                android:id="@+id/power"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="power"
+                android:text="@string/power" />
+
+            <Button
+                android:id="@+id/powerOfTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="powerOfTwo"
+                android:text="@string/powerOfTwo" />
+
+            <Button
+                android:id="@+id/ln"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="ln"
+                android:text="@string/ln" />
+
+            <Button
+                android:id="@+id/log"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="log"
+                android:text="@string/log" />
+
+            <Button
+                android:id="@+id/sqrt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="squareRoot"
+                android:text="@string/squareRoot" />
+        </TableRow>
     </TableLayout>
 
     <EditText
         android:id="@+id/display"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginTop="30dp"
         android:autofillHints="false"
         android:enabled="false"
         android:inputType="none"
