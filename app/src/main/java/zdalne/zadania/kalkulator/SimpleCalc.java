@@ -2,19 +2,21 @@ package zdalne.zadania.kalkulator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.mariuszgromada.math.mxparser.*;
 
 import java.util.ArrayList;
 
 public class SimpleCalc extends AppCompatActivity {
-    private static final long DOUBLE_CLICK_TIME_DELTA = 700;//milliseconds
+    private static final long DOUBLE_CLICK_TIME_DELTA = 300;//milliseconds
 
     long lastClickTime = 0;
 
@@ -36,20 +38,30 @@ public class SimpleCalc extends AppCompatActivity {
         display.append("0");
         getSupportActionBar().hide();
     }
-    private void updateHistory(String resultToAdd){
+
+    private void updateHistory(String resultToAdd) {
         history.add(resultToAdd);
-        historyDisplay.append(history.get(history.size()-1) + ' ');
+        historyDisplay.append(history.get(history.size() - 1) + ' ');
+    }
+
+    private void showToast() {
+
+        Context context = getApplicationContext();
+        CharSequence text = "Wrong input";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast.makeText(context, text, duration).show();
     }
 
     private void calculate() {
         String userExp = display.getText().toString();
         Expression exp = new Expression(userExp);
         String result = String.valueOf(exp.calculate());
-        if(result.equals("NaN")){
-           display.setText("0");
-           display.setSelection(1);
-        }
-        else{
+        if (result.equals("NaN")) {
+            showToast();
+            display.setText("0");
+            display.setSelection(1);
+        } else {
             display.setText(result);
             updateHistory(result);
             display.setSelection(result.length());
@@ -247,7 +259,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -264,7 +276,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -281,7 +293,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -298,7 +310,7 @@ public class SimpleCalc extends AppCompatActivity {
         if (operatorIndex >= 1) {
             calculate();
             checkIfDot = display.getText().toString().indexOf('.');
-            if(checkIfDot == -1){
+            if (checkIfDot == -1) {
                 leftDot = 0;
             }
             rightDot = 0;
@@ -313,6 +325,7 @@ public class SimpleCalc extends AppCompatActivity {
 
     public void result(View view) {
         calculate();
+        leftDot = 1;
         rightDot = 0;
         operatorIndex = 0;
     }
@@ -337,8 +350,7 @@ public class SimpleCalc extends AppCompatActivity {
             rightDot = 0;
             display.setSelection(display.getText().length());
             lastClickTime = 0;
-        }
-        else {
+        } else {
             int cursor = display.getSelectionStart();
             int textLen = display.getText().length();
 
@@ -390,13 +402,11 @@ public class SimpleCalc extends AppCompatActivity {
                 leftString = operatedString.substring(0, operatorIndex);
                 rightString = operatedString.substring(operatorIndex + 1, textLen);
                 resultString = leftString + '+' + rightString;
-            }
-            else if (operatedString.charAt(operatorIndex+1) == '-'){
-                leftString = operatedString.substring(0, operatorIndex+1);
+            } else if (operatedString.charAt(operatorIndex + 1) == '-') {
+                leftString = operatedString.substring(0, operatorIndex + 1);
                 rightString = operatedString.substring(operatorIndex + 2, textLen);
                 resultString = leftString + rightString;
-            }
-            else {
+            } else {
                 leftString = operatedString.substring(0, operatorIndex + 1);
                 rightString = operatedString.substring(operatorIndex + 1, textLen);
                 resultString = leftString + '-' + rightString;

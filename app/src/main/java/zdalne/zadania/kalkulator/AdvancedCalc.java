@@ -25,7 +25,7 @@ public class AdvancedCalc extends AppCompatActivity {
     private ArrayList<String> history = new ArrayList<>();
     private int operatorIndex = 0;
 
-    private static final long DOUBLE_CLICK_TIME_DELTA = 700;//milliseconds
+    private static final long DOUBLE_CLICK_TIME_DELTA = 300;
 
     long lastClickTime = 0;
 
@@ -56,6 +56,7 @@ public class AdvancedCalc extends AppCompatActivity {
         String result = String.valueOf(exp.calculate());
 
         if(result.equals("NaN")){
+            showToast();
             display.setText("0");
             display.setSelection(1);
         }
@@ -332,6 +333,7 @@ public class AdvancedCalc extends AppCompatActivity {
 
     public void result(View view) {
         calculate();
+        leftDot = 1;
         rightDot = 0;
         operatorIndex = 0;
     }
